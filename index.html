@@ -90,9 +90,40 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <h2>Begin</h2>
-                <p>How to use</p>
-				<p>Line 2</p>
-				<p>Line 3</p>
+                <p>Stuff</p>
+					<!-- stats -->
+					<h3 style="margin-top:90px">Stats:</h3>
+					<div style="margin-top:5px; margin-left:auto; margin-right:auto;">
+						<label id="lblTimer" style="font-size:normal; font-weight:bold;">Time: -</label>
+					</div> 
+					
+					 <div style="margin-top:10px; margin-left:auto; margin-right:auto;">
+						<label id="lblSpellsLeft" style="font-size:normal; font-weight:bold;">Spells Left: -</label>
+					</div>                      
+					
+					 <div style="margin-top:10px; margin-left:auto; margin-right:auto;">
+						<label id="lblSpellsInvoked" style="font-size:normal; font-weight:bold;">Spells Invoked: -</label>
+					</div> 
+
+					<div style="margin-top:10px; margin-left:auto; margin-right:auto;">
+						<label id="lblKeysPressed" style="font-size:normal; font-weight:bold;">Keys Pressed: -</label>
+					</div> 
+					
+					<!-- dots -->
+					<div style="width:200px; margin-left:auto; margin-right:auto; text-align:center;">
+						<div id="divOne" style="margin: 5px; width:50px; height:50px; float:left; border-radius:100%; border: 1px solid #000000; background-color:#00FFFF"></div>
+						<div id="divTwo" style="margin: 5px; width:50px; height:50px; float:left;border-radius:100%; border: 1px solid #000000; background-color:#FF00FF"></div>
+						<div id="divThree" style="margin: 5px; width:50px; height:50px; float:left; border-radius:100%; border: 1px solid #000000; background-color:#FFD700"></div> 
+					</div>
+					
+					<!-- start button -->
+					<div
+						<button type="button" class="btn btn-default btn-lg" onclick="loadGame(&#39;Classic&#39);">Begin</button>   
+					</div>
+					
+					<div>
+						<button type="button" class="btn btn-default btn-lg" onclick="startGame();">Start</button>  
+					</div>
             </div>
         </div>
     </section>
@@ -151,6 +182,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="js/grayscale.js"></script>
+	<script type="text/javascript" src="js/invoke.js"></script>
 
 </body>
 
