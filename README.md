@@ -3,7 +3,7 @@ Invoker skill practice script
 
 V0.03
 
-Added: 
+**Added:**
 
 Initiates page/variables
 
@@ -21,19 +21,21 @@ Display Next Spell/Finish
 
 Randomizer
 
-Broken ~~Cast Spell~~
-
 Begin and Loads Classic Game (2 functions)
 
 Starts Game
 
-To do:
+**To do:**
 
-Broken ~~keyboard input~~
+JQuery stuff 
 
-Broken ~~Adds spells to a queue~~ (I shouldn't use integers)
+Broken: ~~keyboard input~~
 
-Broken ~~Cast Spell~~
+Broken: ~~Adds spells to a queue~~ (I shouldn't use integers)
+
+Broken: ~~Cast Spell~~
+
+Broken: ~~Cast Spell~~
 
 V0.02
 
