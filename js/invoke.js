@@ -80,7 +80,7 @@ var combos = [
 ];
 
 // This is the queue of combos objects
-var queue = new Array();
+var queue = ["z", "z", "z", "z", "z", "z"];
 
 // This is the list of 10 combo integers that we will use for the challenge
 var comboList = new Array();
@@ -107,13 +107,8 @@ function addToQueue(i){
 		queue.push(combos[i]);
 	}
 **/
-	if (queue.length < 6){
-		queue.push(i);
-	}
-	else {
-		queue.shift();
-		queue.push(i);
-	}
+	queue.shift();
+	queue.push(i);
 }
 
 // Array shuffler
