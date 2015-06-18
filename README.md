@@ -1,9 +1,14 @@
 # InvokerPractice
 Invoker skill practice script
 
-V0.03
+**V0.1**
 
-**Added:**
+Brand new rewritten Invoke script
+Does not function graphicall
+
+**V0.03**
+
+*Added:*
 
 Initiates page/variables
 
@@ -25,7 +30,7 @@ Begin and Loads Classic Game (2 functions)
 
 Starts Game
 
-**To do:**
+*To do:*
 
 JQuery stuff 
 
@@ -37,7 +42,9 @@ Broken: ~~Cast Spell~~
 
 Broken: ~~Cast Spell~~
 
-V0.02
+Queue
+
+**V0.02**
 
 Can start game
 
@@ -45,13 +52,13 @@ Circles now on page
 
 Stats counter on page
 
-v0.01
+**v0.01**
 
 Initial upload of all of the files including templates
 
 Mostly design elements
 
-To-do:
+*To-do:*
 
 Description of DoTA2 and Invoker
 

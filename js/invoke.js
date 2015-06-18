@@ -1,318 +1,281 @@
-$(function () {
-	$(document).keydown(function (event) {
-		if ($.browser.msie)
-		{ handleKeyboard(event.keyCode.toString()); }
-		else
-		{ handleKeyboard(event.which.toString()); }
+$(function() {
+	console.log( 'Ready to launch!' );
+	generateNewComboList();
+    $(document).keydown(function(event){
+		var keyCode = (event.keyCode ? event.keyCode : event.which);
+		// If they press 'D', check if the two arrayLists are the same
+		switch (keyCode) {
+			
+		// D
+        case 68:
+			addToQueue(5);
+            execute();		
+            break;
+		// 1
+        case 49:
+            addToQueue(9);
+			console.log(queue.join(''));
+            break;
+			
+		// Q
+        case 81:
+            addToQueue(1);
+			console.log(queue.join(''));
+            break;
+			
+		// W
+        case 87:
+            addToQueue(2);
+			console.log(queue.join(''));
+            break;
+			
+		// E
+        case 69:
+            addToQueue(3);
+			console.log(queue.join(''));
+            break;
+			
+		// R
+        case 82:
+            addToQueue(4);
+			console.log(queue.join(''));
+            break;
+			
+        default:
+            break;
+    }
 	});
-
-	//Initiate everything
-
-	window.currentSpellIndex = 0;
-	window.quasColor = "#00FFFF";
-	window.wexColor = "#FF00FF";
-	window.exortColor = "#FFD700";
-	window.gameMode = "None";
-	window.spellsInvoked = 0;
-	window.keysPressed = 0;
-	window.endlessGameStarted = false;
-	window.invokedSpells = [null, null];
-	window.challengeSpells = [new Object(), new Object()];
-	window.spellsCast = 0;
-	window.challengeSpellOneIndex = 0;
-	window.challengeSpellTwoIndex = 1;
-
-	//QWE Spells
-
-	window.spellQueue = new Array();
-
-	window.nextSpellNumber = new Array();
-	window.nextSpellNumber = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
-
-	window.spellList = new Array();
-	window.spellList[0] = new Object();
-	window.spellList[0].value = "Cold Snap";
-	window.spellList[0].keycombo1 = [1, 1, 1];
-
-	window.spellList[1] = new Object();
-	window.spellList[1].value = "Ghost Walk";
-	window.spellList[1].keycombo1 = [1, 1, 2];
-
-	window.spellList[2] = new Object();
-	window.spellList[2].value = "Ice Wall";
-	window.spellList[2].keycombo1 = [1, 1, 3];
-
-	window.spellList[3] = new Object();
-	window.spellList[3].value = "Tornado";
-	window.spellList[3].keycombo1 = [1, 2, 2];
-
-	window.spellList[4] = new Object();
-	window.spellList[4].value = "Deafening Blast";
-	window.spellList[4].keycombo1 = [1, 2, 3];
-
-	window.spellList[5] = new Object();
-	window.spellList[5].value = "Forge Spirit";
-	window.spellList[5].keycombo1 = [1, 3, 3]
-
-	window.spellList[6] = new Object();
-	window.spellList[6].value = "EMP";
-	window.spellList[6].keycombo1 = [2, 2, 2];
-
-	window.spellList[7] = new Object();
-	window.spellList[7].value = "Alacrity";
-	window.spellList[7].keycombo1 = [2, 2, 3];
-
-	window.spellList[8] = new Object();
-	window.spellList[8].value = "Chaos Meteor";
-	window.spellList[8].keycombo1 = [2, 3, 3];
-
-	window.spellList[9] = new Object();
-	window.spellList[9].value = "Sun Strike";
-	window.spellList[9].keycombo1 = [3, 3, 3];
-
 });
 
-//Keyboard stuff and I have no clue what's going on
-function handleKeyboard(key) {
-	if ((window.timer && window.timer.active && (window.gameMode == 'Classic' || window.gameMode == 'TimeTrial' || window.gameMode == 'Challenge')) ||
-		(window.endlessGameStarted = true && window.gameMode == 'Endless')) {
-		switch (key) {
-			case '81':
-				enqueueElement('quas');
-				break;
-			case '87':
-				enqueueElement('wex');
-				break;
-			case '69':
-				enqueueElement('exort');
-				break;
-			case '82':
-				invokeSpell();
-				break;                       
-			case '68':
-				castSpell(0);
-				break;   
-			case '70':
-				castSpell(1);
-				break;
-		//	case '1':
-		//		enqueueElement('eul');
-		//	case '2':
-		//		enqueueElement('blink');
-		//	case '3'
-		//		enqueneElement('force');
-			default:
-				break;
-		}
-
-		$('#lblKeysPressed').text('Keys Pressed: ' + window.keysPressed++);
-	}
-}
-
-// REMEMBER spell IS AN INTEGER. It's an array of integers within an array
-
-function enqueueElement(spell) {
-	window.spellQueue[0] = window.spellQueue[1];
-	$('#divOne').css('background-color', $('#divTwo').css('background-color'));
-	window.spellQueue[1] = window.spellQueue[2];
-	$('#divTwo').css('background-color', $('#divThree').css('background-color'));
-	window.spellQueue[2] = spell;
-
-	switch (spell) {
-		case 1:
-			$('#divThree').css('background-color', window.quasColor);
-			break;
-		case 2:
-			$('#divThree').css('background-color', window.wexColor);
-			break;
-		case 3:
-			$('#divThree').css('background-color', window.exortColor);
-			break;
-		default:
-			break;
-	}
-
-}
-
-//Checks if two arrays are the same
-
-function arraysIdentical(a, b) {
-    var i = a.length;
-    if (i != b.length) 
-		return false;
-    while (i--) {
-        if (a[i] !== b[i]) 
-			return false;
-    }
-    return true;
-};
-
-//Returns the array list of Q, W, E (Length is 3, from 0-2)
-
-function getSpellQueue() {
-	return (window.spellQueue);
-}
-
-//Check if spell is right
-
-function isSpellCorrect(currentChallengeSpell) {
-	var currentSpellQueue = getSpellQueue();
-	return arraysIdentical(currentSpellQueue, currentChallengeSpell);
-}
-
-// Goes through all of the spells and returns the spellList integer if it matches what they entered, otherwise it returns 10.
-function getNewlyInvokedSpell()
-{
-	for(var i=0; i<window.spellList.length; i++)
+var combos = [
 	{
-		var checkAgainstSpell = window.spellList[i];
-		if(isSpellCorrect(checkAgainstSpell))
-		{                    
-			return checkAgainstSpell;
-		}
-	}
-	
-	return -1;
-}
+	"name": "coldsnap",
+	"item": 9,
+	"skill1": 1,
+	"skill2": 1,
+	"skill3": 1,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#3366FF",
+	"sequence": "911145"
+	},
+	{
+	"name": "ghostwalk",
+	"item": 9,
+	"skill1": 1,
+	"skill2": 1,
+	"skill3": 2,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#6633FF",
+	"sequence": "911245"
+	},
+	{
+	"name": "icewall",
+	"item": 9,
+	"skill1": 1,
+	"skill2": 1,
+	"skill3": 3,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#FF33CC",
+	"sequence": "911345"
+	},
+	{
+	"name": "emp",
+	"item": 9,
+	"skill1": 2,
+	"skill2": 2,
+	"skill3": 2,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#33CCFF",
+	"sequence": "922245"
+	},
+	{
+	"name": "tornado",
+	"item": 9,
+	"skill1": 1,
+	"skill2": 2,
+	"skill3": 2,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#FF3366",
+	"sequence": "912245"
+	},
+	{
+	"name": "alacrity",
+	"item": 9,
+	"skill1": 2,
+	"skill2": 2,
+	"skill3": 3,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#003DF5",
+	"sequence": "922345"
+	},
+	{
+	"name": "sunstrike",
+	"item": 9,
+	"skill1": 3,
+	"skill2": 3,
+	"skill3": 3,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#CC2B14",
+	"sequence": "933345"
+	},
+	{
+	"name": "forgespirit",
+	"item": 9,
+	"skill1": 1,
+	"skill2": 3,
+	"skill3": 3,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#CC33FF",
+	"sequence": "913345"
+	},
+	{
+	"name": "chaosmeteor",
+	"item": 9,
+	"skill1": 2,
+	"skill2": 3,
+	"skill3": 3,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#FF668C",
+	"sequence": "923345"
+	},
+	{
+	"name": "deafeningblast",
+	"item": 9,
+	"skill1": 1,
+	"skill2": 2,
+	"skill3": 3,
+	"invoke": 4,
+	"activate": 5,
+	"color": "#D9FF66",
+	"sequence": "912345"
+	},
+];
 
-// Spell invoking (R key). It calls function of checking if you got spell right and grabbing a new spell
-function invokeSpell() {
+// This is the queue of combos objects
+var queue = new Array();
 
-	//This is what they entered
-	var newInvokedSpell = getNewlyInvokedSpell();
+// This is the list of 10 combo integers that we will use for the challenge
+var comboList = new Array();
 
-	//InvokedSpells is the arrayList
-	//This gives someone a mission
-	if (window.invokedSpells[0] == null ||
-		(newInvokedSpell.spell.value != window.invokedSpells[0].spell.value)) {
+// The next combo you need
+var comboNumber = 0;
 
-		window.invokedSpells[1] = window.invokedSpells[0];
-		window.invokedSpells[0] = newInvokedSpell;
+// How many you've done
+var howMany = 0;
 
-		$('#lblSpellOne').text(window.invokedSpells[0].spell.value);
+// A chain of numbers that was just invoked
+/**
+var currentlyInvoked = 1;
+**/
 
-		if (window.invokedSpells[1]) {
-			$('#lblSpellTwo').text(window.invokedSpells[1].spell.value);
-		}
-
-		$('#lblSpellOneWarning').hide();
+// This will check if there are 6 objects already in the queue array. If not, it adds one. If it does, removes the 1st and adds one.
+function addToQueue(i){
+/**
+	if (queue.length < 6){
+		queue.push(combos[i]);
 	}
 	else {
-		$('#lblSpellOneWarning').show();
+		queue.shift();
+		queue.push(combos[i]);
 	}
-		
-
-	$('#lblSpellsInvoked').text("Spells Invoked: " + ++window.spellsInvoked);
-	$('#lblSpellsLeft').text("Spells Left: " + (10 - window.currentSpellIndex));
-
-}
-
-// Shows the next spell they have to do, or ends the game if it's their 10th
-function displayNextSpell() {
-	if (window.currentSpellIndex < 10) {
-		//Should it be $ or Window?
-		$('#lblSpell').text(window.challengeSpells[0].spell.value + ", " + window.challengeSpells[1].spell.value)                    
+**/
+	if (queue.length < 6){
+		queue.push(i);
 	}
 	else {
-			window.timer.stop();
-			$('#lblSpell').html('Arcana known only to me!<br />Congratulations! Your time: ' + window.count + ' seconds.');
-			$('#btnStart').text('Restart');
-			$('#btnStart').show();
-			$('#btnReturn').show();
-			break;
+		queue.shift();
+		queue.push(i);
 	}
 }
 
-// Random sorter
-function sortRandom(){ 
-	return (0.5 - Math.random()); 
+// Array shuffler
+function shuffle(o){
+    for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
+    return o;
 }
 
-// Cycles spell list randomly a couple of times
-function setupQueueForRandomSpellSelection(){
-	window.currentSpellIndex = 0;
-	window.nextSpellNumber.sort(sortRandom);
-	window.nextSpellNumber.reverse();
-	window.nextSpellNumber.sort(sortRandom);
-	window.nextSpellNumber.reverse();
-	window.nextSpellNumber.sort(sortRandom);
+// This makes a new combo list
+function generateNewComboList(){
+	var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+	comboList = shuffle(numbers);
+	comboNumber = comboList[howMany];
+	console.log(comboList)
 }
 
-//Actually casting the spell
-function castSpell(which) {
-	// Check if invoked
-	if()
-		
-	//Check if there's an item in front
-	//	if there is, check if it's activated
-	displayNextSpell()
+/**
+// Compares 2 lists
+function compareLists(a, b){
+	var objectsAreSame = true;
+	   for(var propertyName in a) {
+		  if(a[propertyName] !== b[propertyName]) {
+			 objectsAreSame = false;
+			 break;
+		  }
+	   }
+	   return objectsAreSame;	
 }
 
-
-//Loads the game
-function loadGame(gameType) {
-	window.gameMode = gameType;
-	switch (window.gameMode) {
-		case 'Classic':
-			$('#lblTimer').html('Time: 30 seconds');
-			$('#lblSpellsLeft').html('Spells Left to solve: 10');
-			$('#lblSpellsInvoked').html('Spells Invoked: 0');
-			break;
-		default:
-			break;
+// Takes the current queue and makes it an integer to compare with
+ function invoke() {
+	if (queue.length < 6){
+		currentlyInvoked = toInteger(queue);
 	}
-
-	$('#lblKeysPressed').html('Keys Pressed: 0');
-
-}
-
-//Starts the game, jQuery stuff
-function startGame() {
-	$('#divOne').css('background-color', '#FFFFFF');
-	$('#divTwo').css('background-color', '#FFFFFF');
-	$('#divThree').css('background-color', '#FFFFFF');
-
-	window.currentSpellIndex = 0;
-	window.spellsInvoked = 0;
-	window.keysPressed = 0;
-	window.spellsCast = 0;
-	window.spellQueue = //something here;
 	
-	$('#lblSpellsInvoked').html('Spells Invoked: 0');
-	$('#lblKeysPressed').html('Keys Pressed: 0');
+	// If the queue is 6 long, it will drop the 1st one because it doesn't matter regarding the invoke
+	else {
+		currentlyInvoked = toInteger(queue).drop();
+	}
 }
 
-// Starts a classic game of getting 10 spells right
-function startClassic() {
 
-	// I can't jQuery yet (I don't remember anything) so you'll have to implement timer
-	window.timer = $.timer(function () {
-		$('#lblTimer').html('Time: ' + (30 - ++(window.count)) + ' seconds');
+// Compares currently 5 typed keys with first 5 numbers of sequence.
+function checkInvoke(a){
+	return (combos.[a].sequence.pop() == currentlyInvoked);
+}
+**/
 
-		// This the end if we ever need it
-		/**
-		if (count >= 30) {
-			window.timer.stop();
-
-			$('#lblSpell').html('My mind....unravels!<br />You failed to invoke all 10 spells in 30 seconds.');
-			$('#btnStart').text('Restart');
-			$('#btnStart').show();
-			$('#btnReturn').show();
+function execute(){
+	var a = queue.join('');
+	var b = combos[comboNumber].sequence;
+	console.log(queue.join(''));
+	console.log(combos[comboNumber].sequence);
+	if (a == b){
+		resetQueue();
+		howMany++;
+		if (howMany <11){
+			comboNumber = comboList[howMany];
+			console.log(combos[comboNumber].sequence);
 		}
-		**/ 
-	});
-	
-	window.timer.set({ time: 1000, autostart: false });
-
-	window.count = 0;
-
-	window.nextSpellNumber.sort(sortRandom);
-	window.nextSpellNumber.sort(sortRandom);
-	window.nextSpellNumber.sort(sortRandom);
-
-	window.timer.play(true);
-
-	displayNextSpell();
-   
+		else {
+			endGame();
+		}
+	}
+	else {
+		console.log("Wrong combo");
+	}
 }
 
+function resetQueue(){
+	queue = [];
+}
+
+function endGame(){
+	console.log("You finished.");
+	resetGame();
+}
+
+function resetGame(){
+	resetQueue();
+	generateNewComboList();
+	comboNumber = 0;
+	howMany = 0;
+}
