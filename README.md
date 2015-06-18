@@ -4,7 +4,8 @@ Invoker skill practice script
 **V0.1**
 
 Brand new rewritten Invoke script
-Does not function graphicall
+
+Does not function graphically
 
 **V0.03**
 
