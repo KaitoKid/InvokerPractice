@@ -1,0 +1,22 @@
+document.getElementById("download").innerHTML = '<a href="data:' + encodeURI("text/json;charset=utf-8," + JSON.stringify(responseData)) + '" download="data.json">download data</a>a>';
+{
+  # on initial setup
+  'TIMESTAMP': {
+    'uuid': UUID, 
+    'state': ,
+    'data': {
+      'player level': ,
+      'finger configuration': ,
+    }
+  },
+  # per key event
+  'TIMESTAMP': {
+    'uuid': UUID,
+    'state': ,
+    'data': {
+      'key event': ,
+      'current queue': ,
+      'target queue': ,
+      'success': ,
+    }}
+}
