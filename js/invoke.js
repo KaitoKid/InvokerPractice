@@ -4,48 +4,16 @@ $(function() {
     $(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
 		// If they press 'D', check if the two arrayLists are the same
-		switch (keyCode) {
-			
-		// D
-        case 68:
-			addToQueue(5);
-            execute();		
-            break;
-		// 1
-        case 49:
-            addToQueue(9);
-			console.log(queue.join(''));
-            break;
-			
-		// Q
-        case 81:
-            addToQueue(1);
-			console.log(queue.join(''));
-            break;
-			
-		// W
-        case 87:
-            addToQueue(2);
-			console.log(queue.join(''));
-            break;
-			
-		// E
-        case 69:
-            addToQueue(3);
-			console.log(queue.join(''));
-            break;
-			
-		// R
-        case 82:
-            addToQueue(4);
-			console.log(queue.join(''));
-            break;
-			
-        default:
-            break;
-    }
-	});
+        if (keyCode in defaultFingerMapping) {
+            addToQueue(defaultFingerMapping[keyCode])
+            execute();
+            console.log(queue.join(''))
+        }
+    });
 });
+
+var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
+// need function to assign new finger mappings
 
 var combos = [
 	{
