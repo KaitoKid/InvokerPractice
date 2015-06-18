@@ -3,128 +3,79 @@ $(function() {
 	generateNewComboList();
     $(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
-		// If they press 'D', check if the two arrayLists are the same
         if (keyCode in defaultFingerMapping) {
             addToQueue(defaultFingerMapping[keyCode])
             execute();
             console.log(queue.join(''))
+        } else {
         }
     });
 });
 
-var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
+//var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
+var defaultFingerMapping = {68: d, 49: i, 81: q, 87: w, 69: e, 82: r}
 // need function to assign new finger mappings
 
 var combos = [
 	{
 	"name": "coldsnap",
-	"item": 9,
-	"skill1": 1,
-	"skill2": 1,
-	"skill3": 1,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#3366FF",
-	"sequence": "911145"
+	//"sequence": "911145",
+    "sequence": "iqqqrd"
 	},
 	{
 	"name": "ghostwalk",
-	"item": 9,
-	"skill1": 1,
-	"skill2": 1,
-	"skill3": 2,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#6633FF",
-	"sequence": "911245"
+	//"sequence": "911245",
+    "sequence": "iqqwrd"
 	},
 	{
 	"name": "icewall",
-	"item": 9,
-	"skill1": 1,
-	"skill2": 1,
-	"skill3": 3,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#FF33CC",
-	"sequence": "911345"
+	//"sequence": "911345",
+    "sequence": "iqqerd",
 	},
 	{
 	"name": "emp",
-	"item": 9,
-	"skill1": 2,
-	"skill2": 2,
-	"skill3": 2,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#33CCFF",
-	"sequence": "922245"
+	//"sequence": "922245",
+    "sequence": "iwwwrd",
 	},
 	{
 	"name": "tornado",
-	"item": 9,
-	"skill1": 1,
-	"skill2": 2,
-	"skill3": 2,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#FF3366",
-	"sequence": "912245"
+	//"sequence": "912245",
+    "sequence": "iqwwrd",
 	},
 	{
 	"name": "alacrity",
-	"item": 9,
-	"skill1": 2,
-	"skill2": 2,
-	"skill3": 3,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#003DF5",
-	"sequence": "922345"
+	//"sequence": "922345",
+    "sequence": "iwwerd",
 	},
 	{
 	"name": "sunstrike",
-	"item": 9,
-	"skill1": 3,
-	"skill2": 3,
-	"skill3": 3,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#CC2B14",
-	"sequence": "933345"
+	//"sequence": "933345",
+    "sequence": "ieeerd",
 	},
 	{
 	"name": "forgespirit",
-	"item": 9,
-	"skill1": 1,
-	"skill2": 3,
-	"skill3": 3,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#CC33FF",
-	"sequence": "913345"
+	//"sequence": "913345",
+    "sequence": "iqeerd"
 	},
 	{
 	"name": "chaosmeteor",
-	"item": 9,
-	"skill1": 2,
-	"skill2": 3,
-	"skill3": 3,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#FF668C",
-	"sequence": "923345"
+	//"sequence": "923345",
+    "sequence": "iweerd",
 	},
 	{
 	"name": "deafeningblast",
-	"item": 9,
-	"skill1": 1,
-	"skill2": 2,
-	"skill3": 3,
-	"invoke": 4,
-	"activate": 5,
 	"color": "#D9FF66",
-	"sequence": "912345"
+	//"sequence": "912345",
+    "sequence": "iqwerd",
 	},
 ];
 
