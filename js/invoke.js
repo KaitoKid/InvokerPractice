@@ -44,7 +44,7 @@ function configureFingers(name, key) {
     var response = prompt("Please enter what key you want for " + name, String.fromCharCode(key))
     var value = defaultFingerMapping[key]
     delete defaultFingerMapping[key]
-    defaultFingerMapping[response] = value;
+    defaultFingerMapping[response.charCodeAt(0) - 32] = value;
 }
 
 //var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
