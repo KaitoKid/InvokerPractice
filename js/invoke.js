@@ -40,6 +40,13 @@ function initialize() {
     addToResponseData((new Date).getTime().toString(), 'initialize', data)
 }
 
+function configureFingers(name, key) {
+    var response = prompt("Please enter what key you want for " + name, String.fromCharCode(key))
+    var value = defaultFingerMapping[key]
+    delete defaultFingerMapping[key]
+    defaultFingerMapping[response] = value;
+}
+
 //var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
 var defaultFingerMapping = {68: 'd', 49: 'i', 81: 'q', 87: 'w', 69: 'e', 82: 'r'}
 var colorMapping = {'d': '#6633FF', 'i': '#FF33CC', 'q': '#33CCFF', 'w': '#FF3366', 'e': '#003DF5', 'r': '#CC2B14'}

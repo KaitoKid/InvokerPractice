@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Invoker Trainer by /-ATHF-\ Ignignokt</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script> 
+    <script type="text/javascript" src="http://code.stephenmorley.org/javascript/queues/Queue.js"></script> 
+   
+    <script type="text/javascript" src="./js/invoke.js"></script>  
+    <style>
+         body
+         {
+                font:12px/17px 'Trebuchet MS', Arial, Helvetica, sans-serif;    
+	            color:#6d6e65;
+         }
+	
+        .threecol-mask {
+	            position:relative;	
+	            clear:both;
+	            float:left;
+	            margin-top: 20px;
+	            width:100%;			
+	            min-width:950px;
+	            overflow:hidden;	
+            }
+
+            .threecol-midmask, .threecol-leftmask {
+	            float:left;
+	            width:100%;			
+	            position:relative;
+            }
+
+            .threecol-mid, .threecol-left, .threecol-right {
+	            float:left;
+	            position:relative;
+	            padding:0 0 1em 0;	
+	            overflow:hidden;	                   
+            }
+
+            .threecol-midmask {
+	            right:25%;			
+            }
+
+            .threecol-leftmask {
+	            right:50%;
+            }
+
+            .threecol-mid {
+	            width:47%;
+	            left:93%;
+                background: #FFFFFF;
+            }
+            .threecol-left {
+	            width:13%;
+	            left:32%;
+	            background-color: #FFFFFF;
+            }
+
+            .threecol-right {
+	            width:34%;			
+	            left:82%;			
+	            background-color: #FFFFFF;
+            }
+
+    </style>
+</head>
+<body>
+
+    <div class="threecol-mask">
+        <div class="threecol-midmask">
+            <div class="threecol-leftmask">
+
+                <div class="threecol-mid" style="text-align:center">
+                    <h1>Invoker Trainer by /-ATHF-\ Ignignokt</h1>
+
+                    <div style="margin-top:30px"> 
+                        <div style="width:200px; margin-left:auto; margin-right:auto; text-align:center;">
+                            <div id="divOne" style="margin: 5px; width:50px; height:50px; float:left; border-radius:100%; border: 1px solid #000000; background-color:#00FFFF"></div>
+                            <div id="divTwo" style="margin: 5px; width:50px; height:50px; float:left;border-radius:100%; border: 1px solid #000000; background-color:#FF00FF"></div>
+                            <div id="divThree" style="margin: 5px; width:50px; height:50px; float:left; border-radius:100%; border: 1px solid #000000; background-color:#FFD700"></div> 
+                        </div>
+                    </div>
+
+                    <div style="margin-top:125px; margin-left:auto; margin-right:auto; text-align:center; width:100%">
+                        <label id="lblSpell" style="line-height:26px;font-size:large; font-weight:bold;"></label>
+                    </div>
+                    
+                    <div style="margin-left:auto; margin-right:auto; text-align:center; width:400px; ">                        
+                        <h2 id="settingsHeader">Settings:</h2>
+                        <button id="btnConfigure" onclick="configureControls();">Configure</button><br /><br />
+                        
+                        <h2 id="playHeader">Play:</h2>
+                        <button id="btnClassic" onclick="loadGame('Classic');">Classic</button>
+                        <button id="btnTimeTrial" onclick="loadGame('TimeTrial');">Time Trial</button>                        
+                        <button id="btnEndless" onclick="loadGame('Endless');">Endless</button>                 
+                        <button id="btnChallenge" onclick="loadGame('Challenge');">Challenge</button>
+                        <br /><br /><br /><br />
+                        <button id="btnStart" style="display:none; width: 75px;" onclick="startGame();">Start</button>     
+                        &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp                 
+                        <button id="btnReturn" style="display:none;" onclick="returnToMain();">Main Menu</button>
+
+                    </div>
+                </div>
+
+                <div class="threecol-left" style="text-align:left;">
+                    <input type="checkbox" id="soundOnOff"/><label id='lblSoundOnOff'>Sound Off</label>
+                     <h3 style ="margin-top:90px">Stats:</h3>
+                     <div style="margin-top:5px; margin-left:auto; margin-right:auto;">
+                        <label id="lblTimer" style="font-size:normal; font-weight:bold;">Time: -</label>
+                    </div> 
+                    
+                     <div style="margin-top:10px; margin-left:auto; margin-right:auto;">
+                        <label id="lblSpellsLeft" style="font-size:normal; font-weight:bold;">Spells Left: -</label>
+                    </div>                      
+                    
+                     <div style="margin-top:10px; margin-left:auto; margin-right:auto;">
+                        <label id="lblSpellsInvoked" style="font-size:normal; font-weight:bold;">Spells Invoked: -</label>
+                    </div> 
+
+                    <div style="margin-top:10px; margin-left:auto; margin-right:auto;">
+                        <label id="lblKeysPressed" style="font-size:normal; font-weight:bold;">Keys Pressed: -</label>
+                    </div> 
+
+                    <div style="margin-top:225px; margin-left:auto; margin-right:auto;">
+                        <button id="btnAbout" onclick="showHideAboutClick();" style="margin-bottom:15px">About</button>
+                         <div id="aboutDiv" style="display:none">
+                            This app was created to help <br />
+                            DotA players new to Invoker <br />
+                            memorize his spell <br />
+                            combinations and make <br />
+                            learning Invoker <br />
+                            a little less daunting. <br /><br />
+
+                            My name is not Ignignokt, </br.>
+                            but I am a software consultant
+                            in the Chicago area specializing <br />
+                            in Web development, <br/>
+                            specifically Microsoft and .NET <br />
+                            technologies.<br /><br />
+
+                            Comments and suggestions can <br />
+                            be sent to: <a href="mailto:stsoftwaresolutions@gmail.com">stsoftwaresolutions@gmail.com</a><br />
+                            (It's just me, not a company)<br />
+                            
+                        </div>
+                    </div> 
+                </div>
+
+                <div class="threecol-right">
+                    <b>Instructions:</b>     <br/>                   
+                        - Controls:  <br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblQuasKey"></label> - Quas  <br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblWexKey"></label> - Wex <br/> 
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblExortKey"></label> - Exort <br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblInvokeKey"></label> - Invoke Spell <br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblSpellOneKey"></label> - <label id="lblSpellOne">Spell One</label> <label id="lblSpellOneWarning" style="color:#FF0000">Already Invoked!</label><br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblSpellTwoKey"></label> - <label id="lblSpellTwo">Spell Two</label><br/><br />
+                            -Click Configure to customize controls <br />&nbsp&nbsp(cookies must be enabled)
+                             <br/> <br/>
+                        - Choose A Mode and Click Start <br/>
+                            &nbsp&nbsp&nbsp&nbsp- Classic - Invoke 10 spells as fast as you can. <br/>
+                            &nbsp&nbsp&nbsp&nbsp- Time Trial - Invoke as many spells as possible in 30 <br />
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp seconds <br/>
+                            &nbsp&nbsp&nbsp&nbsp- Endless - No timer. Practice for as long as you want. <br />
+                            &nbsp&nbsp&nbsp&nbsp- Challenge - Invoke <u>and cast</u> as many combinations <br />
+                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp of spells in 30 seconds as you can.<br/> <br/>
+
+                        - For new Invokers <a href="http://www.dota2wiki.com/wiki/Invoker#Invoked_Skills">here</a> is a list of what the spells do.<br/><br />
+                        - As well as <a href="http://www.dota2wiki.com/wiki/Invoker#Abilities">what</a> quas, wex and exort do when not <br/>
+                        &nbsp invoked. <br/><br />
+
+                        - Special thanks to <a href="http://www.reddit.com/r/DotA2">r/DotA2</a> for the suggestions!
+                        <br /><br />
+                         <button id="btnShowHide" onclick="showHideMenuClick();">Show Cheat Sheet</button>
+                         <div id="cheatsheet" style="display:none">
+                            <ul style="list-style:none; padding:0;">
+                                <li>Cold Snap - Quas Quas Quas</li>
+                                <li>Ghost Walk - Quas Quas Wex</li>
+                                <li>Ice Wall - Quas Quas Exort</li>
+                                <li>EMP - Wex Wex Wex</li>
+                                <li>Tornado - Wex Wex Quas</li>
+                                <li>Alacrity - Wex Wex Exort</li>
+                                <li>Sun Strike - Exort Exort Exort</li>
+                                <li>Forge Spirit - Exort Exort Quas</li>
+                                <li>Chaos Meteor - Exort Exort Wex</li>
+                                <li>Deafening Blast - Quas Wex Exort</li>
+                                
+                            </ul>
+                        </div>
+                </div>
+            </div>
+        </div>
+        <audio id="soundHandle" style="display: none;"></audio>
+
+        <div class="clear" />
+     
+</body>
+</html>

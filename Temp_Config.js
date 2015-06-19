@@ -1,4 +1,3 @@
-
 function changeItem(){
 	var response = prompt("Please enter what key you want for Eul's", "1");
 	defaultFingerMapping[49] = response;
