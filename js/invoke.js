@@ -1,18 +1,22 @@
 $(function() {
 	console.log( 'Ready to launch!' );
-	generateNewComboList();
+    initialize();
+    start();
 });
 
 function start(){
     // let's be deterministic
 	// generateNewComboList();
-    
-    initialize();
+    comboList = ["1", "2"]  
+	comboNumber = comboList.shift();
+	console.log("Your first combo is");
+	console.log(combos[comboNumber].sequence);
+	console.log("Game begun");
 }
 
 function initialize() {
 	var colorNumber = [0, 0, 0, 0, 0, 0];
-	console.log("Game begun");
+	console.log(comboList);
 	$('#circleOne').css('background-color', '#FFFFFF');
 	$('#circleTwo').css('background-color', '#FFFFFF');
 	$('#circleThree').css('background-color', '#FFFFFF');	
@@ -21,18 +25,24 @@ function initialize() {
 	$('#circleSix').css('background-color', '#FFFFFF');
     $(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
-        if (keyCode in defaultFingerMapping) {
-            addToQueue(defaultFingerMapping[keyCode])
-            execute();
-            shiftColor();
-            console.log(queue.join(''))
-        } else {
-        }
+        execute(keyCode);
     });
+    $(document).keyup(function(event){
+        var keyCode = (event.keyCode ? event.keyCode : event.which);
+        addToResponseData((new Date).getTime().toString(), 'key up', {})
+    })
+    var data = {
+        'finger mappings': defaultFingerMapping,
+        'dota2 level': 0,
+        'invoker level': 0,
+        'task mode': 'practice'
+    }
+    addToResponseData((new Date).getTime().toString(), 'initialize', data)
 }
 
 //var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
 var defaultFingerMapping = {68: 'd', 49: 'i', 81: 'q', 87: 'w', 69: 'e', 82: 'r'}
+var colorMapping = {'d': '#6633FF', 'i': '#FF33CC', 'q': '#33CCFF', 'w': '#FF3366', 'e': '#003DF5', 'r': '#CC2B14'}
 // need function to assign new finger mappings
 
 var combos = [
@@ -94,11 +104,15 @@ var queue = ["z", "z", "z", "z", "z", "z"];
 // This is the list of 10 combo integers that we will use for the challenge
 var comboList = new Array();
 
-// The next combo you need
-var comboNumber = 0;
+var comboNumber;
+var responseData = {};
 
-// How many you've done
-var howMany = 0;
+function addToResponseData(timestamp, state, data) {
+    responseData[timestamp] = {
+        'state': state,
+        'data': data,
+    }
+}
 
 // Number of presses
 var presses = 0;
@@ -112,45 +126,47 @@ function addToQueue(i){
 	queue.push(i);
 }
 
+function addColor(i){
+	colorNumber.shift();
+	colorNumber.push(i);
+}
+
 // Array shuffler
 function shuffle(o){
     for(var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x);
     return o;
 }
 
-// This makes a new combo list
-function generateNewComboList(){
-	var numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
-	comboList = shuffle(numbers);
-	comboNumber = comboList[howMany];
-	console.log(comboList);
-	console.log("Your first combo is");
-	console.log(combos[comboNumber].sequence);
-}
 
-
-function execute(){
-	var a = queue.join('');
-	var b = combos[comboNumber].sequence;
-	if (a == b){
-		resetQueue();
-		howMany++;
-		if (howMany <11){
-			comboNumber = comboList[howMany];
-			console.log("Your next combo is");
-			console.log(combos[comboNumber].sequence);
-		}
-		else {
-			endGame();
-		}
-	}
-	else {
-		console.log("Wrong combo");
-	}
-}
-
-function resetQueue(){
-	queue = [];
+function execute(keyCode){
+    var timestamp = (new Date).getTime().toString();
+    var targetQueue = combos[comboNumber].sequence;
+    var successState = 'unmatched';
+    if (keyCode in defaultFingerMapping) {
+        addToQueue(defaultFingerMapping[keyCode])
+        addColor(colorMapping[defaultFingerMapping[keyCode]]);
+        shiftColor();
+        var currentQueue = queue.join('');
+        console.log(targetQueue);
+        console.log(currentQueue);
+        if (targetQueue == currentQueue) {
+            successState = 'matched';
+            if (comboList.length > 0) {
+                comboNumber = comboList.shift();
+                console.log("Your next combo is");
+                console.log(combos[comboNumber].sequence);
+            } else {
+                endGame();
+            }
+        }
+    }
+    var data = {
+        'key event': keyCode,
+        'target queue': targetQueue,
+        'current queue': currentQueue,
+        'success state': successState,
+    };
+    addToResponseData(timestamp, 'key down', data);
 }
 
 function endGame(){
@@ -159,8 +175,9 @@ function endGame(){
 }
 
 function resetGame(){
+    $(document).unbind('')
 	resetQueue();
-	generateNewComboList();
+	//generateNewComboList();
 	comboNumber = 0;
 	howMany = 0;
 }
@@ -171,18 +188,6 @@ $( "start" ).click(function() {start();});
 $( "skip" ).click(function() {skip();});
 $( "endGame" ).click(function() {endGame();});
 
-var colors = [
-	"#FFFFFF", 
-	"#6633FF",
-	"#FF33CC",
-	"#33CCFF",
-	"#FF3366",
-	"#003DF5",
-	"#CC2B14",
-	"#CC33FF",
-	"#FF668C",
-	"#D9FF66"
-]
 
 function resetQueue(){
 	queue = [];
@@ -196,7 +201,7 @@ function endGame(){
 
 function resetGame(){
 	resetQueue();
-	generateNewComboList();
+	//generateNewComboList();
 	comboNumber = 0;
 	howMany = 0;
 	var colorNumber = [0, 0, 0, 0, 0, 0];
@@ -213,30 +218,10 @@ function resetGame(){
 
 function shiftColor(){
 	$('#presses').text('Presses: ' + presses++);
-	console.log("Shifting color");
-    console.log(colorNumber[0])
-	$('#circleOne').css('background-color', colors[colorNumber[0]]);
-	$('#circleTwo').css('background-color', colors[colorNumber[1]]);	
-	$('#circleThree').css('background-color', colors[colorNumber[2]]);	
-	$('#circleFour').css('background-color', colors[colorNumber[3]]);	
-	$('#circleFive').css('background-color', colors[colorNumber[4]]);	
-	$('#circleSix').css('background-color', colors[colorNumber[5]]);
+	$('#circleOne').css('background-color', colorNumber[0]);
+	$('#circleTwo').css('background-color', colorNumber[1]);	
+	$('#circleThree').css('background-color', colorNumber[2]);	
+	$('#circleFour').css('background-color', colorNumber[3]);	
+	$('#circleFive').css('background-color', colorNumber[4]);
+	$('#circleSix').css('background-color', colorNumber[5]);
 }
-
-function skip(){
-	resetQueue();
-	howMany++;
-	if (howMany <10){
-			comboNumber = comboList[howMany];
-			console.log("You have completed " + howMany + " combos");
-			console.log("You have " + (10-howMany) + " combos to go");
-			console.log("Your next combo is");
-			console.log(combos[comboNumber].sequence);
-			$('#correctNumber').text('Correct: ' + howMany);
-			$('#nameofCombo').text(combos[howMany].name);
-		}
-		else {	
-			endGame();			
-		}
-}
-
