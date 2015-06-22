@@ -49,14 +49,16 @@ var queueIds = ['circleOne', 'circleTwo', 'circleThree', 'circleFour', 'circleFi
 var queueKeys = ['1', 'q', 'w', 'e', 'r', 'd'];
 
 function initialize(mode) {
-    queue = _.map(queueKeys, function(key) {return new Circle(colorMapping[key], key)});
+    queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
     updateCircles();
 	console.log(comboList);
-    $(document).keydown(function(event){
+    $(document).unbind('keydown')
+    $(document).unbind('keyup')
+    $(document).on('keydown', function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
         execute(keyCode);
     });
-    $(document).keyup(function(event){
+    $(document).on('keyup', function(event){
         var keyCode = (event.keyCode ? event.keyCode : event.which);
         addToResponseData((new Date).getTime().toString(), 'key up', {})
     })
@@ -67,7 +69,6 @@ function initialize(mode) {
         'task mode': mode
     }
     addToResponseData((new Date).getTime().toString(), 'initialize', data)
-	
 }
 
 function configureFingers(name, key) {
@@ -137,9 +138,6 @@ var combos = [
 	},
 ];
 
-// This is the queue of combos objects
-var queue = ["z", "z", "z", "z", "z", "z"];
-
 // This is the list of 10 combo integers that we will use for the challenge
 var comboList = new Array();
 
@@ -200,60 +198,27 @@ function execute(keyCode){
     addToResponseData(timestamp, 'key down', data);
 }
 
-function endGame(){
-	console.log("You finished.");
-	resetGame();
-}
-
-function resetGame(){
-    $(document).unbind('')
-	resetQueue();
-	//generateNewComboList();
-	comboNumber = 0;
-	howMany = 0;
-}
-
 
 $( "reset" ).click(function() {resetGame();});
 $( "start" ).click(function() {start();});
 $( "skip" ).click(function() {skip();});
 $( "endGame" ).click(function() {endGame();});
 
-
-function resetQueue(){
-	queue = [];
-}
-
 function endGame(){
-	$('#correctNumber').text('Complete');	
-	$('#nameofCombo').text('Press reset to play again');
-	console.log("You have finished");
-}
-
-function resetGame(){
-	resetQueue();
-	//generateNewComboList();
-	comboNumber = 0;
-	howMany = 0;
-	queue = [0, 0, 0, 0, 0, 0];
-	$('#circleOne').css('background-color', '#FFFFFF');
-	$('#circleTwo').css('background-color', '#FFFFFF');
-	$('#circleThree').css('background-color', '#FFFFFF');	
-	$('#circleFour').css('background-color', '#FFFFFF');
-	$('#circleFive').css('background-color', '#FFFFFF');
-	$('#circleSix').css('background-color', '#FFFFFF');
-	$('#correctNumber').text('Correct: ' + howMany);
+    $(document).unbind('keydown')
+    $(document).unbind('keyup')
+    queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
+    updateCircles();
 	console.log("Game has been reset");
 }
 
-
 function showHideMenuClick(){
 	if ($('#cheatsheet').css('display') == 'block') {
-                $('#cheatsheet').css('display', 'none');
-                $('#btnShowHide').text('Show Cheat Sheet');
-            }
-            else {
-                $('#cheatsheet').css('display', 'block');
-                $('#btnShowHide').text('Hide Cheat Sheet');
-            }
+        $('#cheatsheet').css('display', 'none');
+        $('#btnShowHide').text('Show Cheat Sheet');
+    }
+    else {
+        $('#cheatsheet').css('display', 'block');
+        $('#btnShowHide').text('Hide Cheat Sheet');
+    }
 }
