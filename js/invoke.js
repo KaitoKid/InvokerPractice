@@ -4,17 +4,42 @@ $(function() {
     start();
 });
 
-function start(){
+function practice() {
+    var combosToDo = ["1", "2"];
+    initialize('practice');
+    start(combosToDo);
+}
+
+function baseline() {
+    var combosToDo = ["3", "4"];
+    initialize('baseline');
+    start(combosToDo);
+}
+
+function training() {
+    var combosToDo = ["4", "5"];
+    initialize('training');
+    start(combosToDo);
+}
+
+function posttest() {
+    var combosToDo = ["5", "6"];
+    initialize('posttest');
+    start(combosToDo);
+}
+
+
+function start(combos){
     // let's be deterministic
 	// generateNewComboList();
-    comboList = ["1", "2"]  
+    comboList = combos;
 	comboNumber = comboList.shift();
 	console.log("Your first combo is");
 	console.log(combos[comboNumber].sequence);
 	console.log("Game begun");
 }
 
-function initialize() {
+function initialize(mode) {
 	var colorNumber = [0, 0, 0, 0, 0, 0];
 	console.log(comboList);
 	$('#circleOne').css('background-color', '#FFFFFF');
@@ -35,7 +60,7 @@ function initialize() {
         'finger mappings': defaultFingerMapping,
         'dota2 level': 0,
         'invoker level': 0,
-        'task mode': 'practice'
+        'task mode': mode
     }
     addToResponseData((new Date).getTime().toString(), 'initialize', data)
 }
