@@ -67,6 +67,7 @@ function initialize(mode) {
         'task mode': mode
     }
     addToResponseData((new Date).getTime().toString(), 'initialize', data)
+	
 }
 
 function configureFingers(name, key) {
@@ -246,3 +247,13 @@ function resetGame(){
 }
 
 
+function showHideMenuClick(){
+	if ($('#cheatsheet').css('display') == 'block') {
+                $('#cheatsheet').css('display', 'none');
+                $('#btnShowHide').text('Show Cheat Sheet');
+            }
+            else {
+                $('#cheatsheet').css('display', 'block');
+                $('#btnShowHide').text('Hide Cheat Sheet');
+            }
+}
