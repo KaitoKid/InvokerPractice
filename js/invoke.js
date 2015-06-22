@@ -1,9 +1,3 @@
-$(function() {
-	console.log( 'Ready to launch!' );
-    initialize();
-    start();
-});
-
 function practice() {
     var combosToDo = ["1", "2"];
     initialize('practice');
@@ -29,10 +23,10 @@ function posttest() {
 }
 
 
-function start(combos){
+function start(combosToDo){
     // let's be deterministic
 	// generateNewComboList();
-    comboList = combos;
+    comboList = combosToDo;
 	comboNumber = comboList.shift();
 	console.log("Your first combo is");
 	console.log(combos[comboNumber].sequence);
