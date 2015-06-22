@@ -33,15 +33,25 @@ function start(combosToDo){
 	console.log("Game begun");
 }
 
+function Circle(color, letter) {
+    this.color = color;
+    this.letter = letter;
+}
+
+function updateCircles() {
+    _.each(queue, function(circle, i) {
+        $('#' + queueIds[i]).css('background-color', circle.color);
+        $('#' + queueIds[i]).text(circle.letter);
+    })
+}
+
+var queueIds = ['circleOne', 'circleTwo', 'circleThree', 'circleFour', 'circleFive', 'circleSix'];
+var queueKeys = ['1', 'q', 'w', 'e', 'r', 'd'];
+
 function initialize(mode) {
-	var colorNumber = [0, 0, 0, 0, 0, 0];
+    queue = _.map(queueKeys, function(key) {return new Circle(colorMapping[key], key)});
+    updateCircles();
 	console.log(comboList);
-	$('#circleOne').css('background-color', '#FFFFFF');
-	$('#circleTwo').css('background-color', '#FFFFFF');
-	$('#circleThree').css('background-color', '#FFFFFF');	
-	$('#circleFour').css('background-color', '#FFFFFF');
-	$('#circleFive').css('background-color', '#FFFFFF');
-	$('#circleSix').css('background-color', '#FFFFFF');
     $(document).keydown(function(event){
 		var keyCode = (event.keyCode ? event.keyCode : event.which);
         execute(keyCode);
@@ -67,60 +77,62 @@ function configureFingers(name, key) {
 }
 
 //var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
-var defaultFingerMapping = {68: 'd', 49: 'i', 81: 'q', 87: 'w', 69: 'e', 82: 'r'}
-var colorMapping = {'d': '#6633FF', 'i': '#FF33CC', 'q': '#33CCFF', 'w': '#FF3366', 'e': '#003DF5', 'r': '#CC2B14'}
+var defaultFingerMapping = {68: 'd', 49: '1', 81: 'q', 87: 'w', 69: 'e', 82: 'r'}
+var colorMapping = {'d': '#6633FF', '1': '#FF33CC', 'q': '#33CCFF', 'w': '#FF3366', 'e': '#003DF5', 'r': '#CC2B14'}
+// Your color history
+var queue;
 // need function to assign new finger mappings
 
 var combos = [
 	{
 	"name": "coldsnap",
 	"color": "#3366FF",
-    "sequence": "iqqqrd"
+    "sequence": "1qqqrd"
 	},
 	{
 	"name": "ghostwalk",
 	"color": "#6633FF",
-    "sequence": "iqqwrd"
+    "sequence": "1qqwrd"
 	},
 	{
 	"name": "icewall",
 	"color": "#FF33CC",
-    "sequence": "iqqerd",
+    "sequence": "1qqerd",
 	},
 	{
 	"name": "emp",
 	"color": "#33CCFF",
-    "sequence": "iwwwrd",
+    "sequence": "1wwwrd",
 	},
 	{
 	"name": "tornado",
 	"color": "#FF3366",
-    "sequence": "iqwwrd",
+    "sequence": "1qwwrd",
 	},
 	{
 	"name": "alacrity",
 	"color": "#003DF5",
-    "sequence": "iwwerd",
+    "sequence": "1wwerd",
 	},
 	{
 	"name": "sunstrike",
 	"color": "#CC2B14",
-    "sequence": "ieeerd",
+    "sequence": "1eeerd",
 	},
 	{
 	"name": "forgespirit",
 	"color": "#CC33FF",
-    "sequence": "iqeerd"
+    "sequence": "1qeerd"
 	},
 	{
 	"name": "chaosmeteor",
 	"color": "#FF668C",
-    "sequence": "iweerd",
+    "sequence": "1weerd",
 	},
 	{
 	"name": "deafeningblast",
 	"color": "#D9FF66",
-    "sequence": "iqwerd",
+    "sequence": "1qwerd",
 	},
 ];
 
@@ -143,19 +155,13 @@ function addToResponseData(timestamp, state, data) {
 // Number of presses
 var presses = 0;
 
-// Your color history
-var colorNumber = [0, 0, 0, 0, 0, 0];
 
-// This will check if there are 6 objects already in the queue array. If not, it adds one. If it does, removes the 1st and adds one.
-function addToQueue(i){
+function addToQueue(color, letter){
 	queue.shift();
-	queue.push(i);
+	queue.push(new Circle(color, letter));
+    updateCircles();
 }
 
-function addColor(i){
-	colorNumber.shift();
-	colorNumber.push(i);
-}
 
 // Array shuffler
 function shuffle(o){
@@ -169,10 +175,8 @@ function execute(keyCode){
     var targetQueue = combos[comboNumber].sequence;
     var successState = 'unmatched';
     if (keyCode in defaultFingerMapping) {
-        addToQueue(defaultFingerMapping[keyCode])
-        addColor(colorMapping[defaultFingerMapping[keyCode]]);
-        shiftColor();
-        var currentQueue = queue.join('');
+        addToQueue(colorMapping[defaultFingerMapping[keyCode]], defaultFingerMapping[keyCode])
+        var currentQueue = _.map(queue, function(q) {return q.letter}).join('');
         console.log(targetQueue);
         console.log(currentQueue);
         if (targetQueue == currentQueue) {
@@ -230,7 +234,7 @@ function resetGame(){
 	//generateNewComboList();
 	comboNumber = 0;
 	howMany = 0;
-	var colorNumber = [0, 0, 0, 0, 0, 0];
+	queue = [0, 0, 0, 0, 0, 0];
 	$('#circleOne').css('background-color', '#FFFFFF');
 	$('#circleTwo').css('background-color', '#FFFFFF');
 	$('#circleThree').css('background-color', '#FFFFFF');	
@@ -242,12 +246,3 @@ function resetGame(){
 }
 
 
-function shiftColor(){
-	$('#presses').text('Presses: ' + presses++);
-	$('#circleOne').css('background-color', colorNumber[0]);
-	$('#circleTwo').css('background-color', colorNumber[1]);	
-	$('#circleThree').css('background-color', colorNumber[2]);	
-	$('#circleFour').css('background-color', colorNumber[3]);	
-	$('#circleFive').css('background-color', colorNumber[4]);
-	$('#circleSix').css('background-color', colorNumber[5]);
-}
