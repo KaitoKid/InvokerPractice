@@ -22,28 +22,29 @@ function submitForm() {
 }
 
 function practice() {
-    var combosToDo = ["1", "2"];
+    var combosToDo = ['3', '9', '8', '1'];
+    "1", "3", "8", "9"
     $('#btnpractice').css('display', 'none');
     initialize('practice', combosToDo);
     taskNum++;
 }
 
 function baseline() {
-    var combosToDo = ["3", "4"];
+    var combosToDo = ['3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1', '3', '9', '8', '1'];
     $('#btnbaseline').css('display', 'none');
     initialize('baseline', combosToDo);
     taskNum++;
 }
 
 function training() {
-    var combosToDo = ["4", "5"];
+    var combosToDo = ['1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3', '1', '9', '8', '3'];
     $('#btntraining').css('display', 'none');
     initialize('training', combosToDo);
     taskNum++;
 }
 
 function posttest() {
-    var combosToDo = ["5", "6"];
+    var combosToDo = ['9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8', '9', '1', '3', '8'];
     $('#btnposttest').css('display', 'none');
     initialize('posttest', combosToDo);
     taskNum++;
@@ -86,7 +87,8 @@ function initialize(mode, combosToDo) {
         'finger mappings': defaultFingerMapping,
         'dota2 level': 0,
         'invoker level': 0,
-        'task mode': mode
+        'task mode': mode,
+        'combos': combosToDo,
     }
     addToResponseData((new Date).getTime().toString(), 'initialize', data);
     comboList = combosToDo;
