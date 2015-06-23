@@ -53,7 +53,7 @@ function downloadJson() {
     $('#doneInstructions').css('display', 'block');
 }
 
-function Circle(color, letter) {
+function Circle(color, letter, url) {
     this.color = color;
     this.letter = letter;
 }
@@ -69,7 +69,8 @@ var queueIds = ['circleOne', 'circleTwo', 'circleThree', 'circleFour', 'circleFi
 var queueKeys = ['1', 'q', 'w', 'e', 'r', 'd'];
 
 function initialize(mode, combosToDo) {
-    queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
+    //queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
+    queue = _.map(queueKeys, function(key) {return new Circle('https://upload.wikimedia.org/wikipedia/commons/d/d2/Solid_white.png', '')});
     updateCircles();
     $(document).unbind('keydown')
     $(document).unbind('keyup')
@@ -223,6 +224,8 @@ function execute(keyCode){
 			    showNextComboImage();
                 console.log(combos[comboNumber].sequence);
 				indicateNextCombo(combos[comboNumber].sequence.toUpperCase());
+                queue = _.map(queueKeys, function(key) {return new Circle('', '')});
+                updateCircles();
             } else {
                 endGame(taskNum);
             }
@@ -243,7 +246,7 @@ function execute(keyCode){
 function endGame(nextTask){
     $(document).unbind('keydown')
     $(document).unbind('keyup')
-    queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
+    queue = _.map(queueKeys, function(key) {return new Circle('', '')});
     updateCircles();
     $('#btn' + sectionIDs[taskNum]).css('display', 'block')
     if (taskNum == sectionIDs.length - 1) {
