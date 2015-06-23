@@ -262,17 +262,6 @@ function showHideMenuClick(){
     }
 }
 
-function showHideMenuClick(){
-	if ($('#cheatsheet').css('display') == 'block') {
-        $('#cheatsheet').css('display', 'none');
-        $('#btnShowHide').text('Show Cheat Sheet');
-    }
-    else {
-        $('#cheatsheet').css('display', 'block');
-        $('#btnShowHide').text('Hide Cheat Sheet');
-    }
-}
-
 function showHideMenuClick1(){
 	if ($('#thisInfo').css('display') == 'block') {
         $('#thisInfo').css('display', 'none');
