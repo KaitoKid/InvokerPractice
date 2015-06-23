@@ -37,22 +37,58 @@
                         <h2 id="settingsHeader">Settings:</h2>
 						<p> Change key assignments </p>
 						<p> The combo goes item (Eul's) + skill + skill + skill + invoke + cast </p>
-						<button id ="changeItem" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Eul\'s', 49);">Item</button>
+						<!--button id ="changeItem" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Eul\'s', 49);">Item</button>
 						<button id ="changeQuas" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Quas', 81);">Quas</button>
 						<button id ="changeWex" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Wex', 87);">Wex</button>
 						<button id ="changeExort" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Exort', 69);">Exort</button>
 						<button id ="changeInvoke" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Invoke', 82);">Invoke</button>
-						<button id ="changeCast" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Cast', 68);">Cast</button>
+						<button id ="changeCast" type="button" class="btn btn-default btn-lg" onclick="configureFingers('Cast', 68);">Cast</button-->
                         
                         <h2 id="playHeader">Play:</h2>
-                        <button id="btnClassic" onclick="practice();">Practice</button>
-                        <button id="btnTimeTrial" onclick="baseline();" style="display:none">Baseline</button>                        
-                        <button id="btnEndless" onclick="training();" style="display:none">Training</button>                 
-                        <button id="btnChallenge" onclick="posttest();"style="display:none">Posttest</button>
+                            <form id='bioForm' action="/INSERT_WHERE_ITS_SENT" method="post">
+                                <div>
+                                    <label>Email:</label>
+                                    <input type="text" id="email"/>
+                                </div>
+                                <div>
+                                    <label>Age:</label>
+                                    <input type="text" id="age" />
+                                </div>
+                                <div>
+                                    <label>Gender:</label>
+                                    <select id="gender">
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Rank in Dota2:</label>
+                                    <select id="rank">
+                                        <option value=""></option>
+                                        <option value="not ranked">Not ranked</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label>Experience with Invoker:</label>
+                                    <select id="exp">
+                                        <option value="1">Main</option>
+                                        <option value="2">Occasionally play</option>
+                                        <option value="3">Never played</option>
+                                    </select>
+                                </div>
+                            
+                            </form>
+                        <button id="btnSubmit" onclick="submitForm();">Submit</button>
+                        <button id="btnpractice" onclick="practice();" style="display:none">Practice</button>
+                        <button id="btnbaseline" onclick="baseline();" style="display:none">Baseline</button>                        
+                        <button id="btntraining" onclick="training();" style="display:none">Training</button>                 
+                        <button id="btnposttest" onclick="posttest();"style="display:none">Posttest</button>
+                        <button id="btndownload" onclick="downloadJson();" style="display:none">Download Json</button>
+                        <p id='doneInstructions' style="display:none">Finished with the task!  Download and email the .json file to ___ to be entered into Steam raffle!</p>
                         <br /><br /><br /><br />
-                        <button id="btnStart" style="display:none; width: 75px;" onclick="startGame();">Start</button>     
+                        <!--button id="btnStart" style="display:none; width: 75px;" onclick="startGame();">Start</button>     
                         &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp                 
-                        <button id="btnReturn" style="display:none;" onclick="returnToMain();">Main Menu</button>
+                        <button id="btnReturn" style="display:none;" onclick="returnToMain();">Main Menu</button--->
 
                     </div>
                 </div>
@@ -96,21 +132,6 @@
 						</ul>
 					</div>
 					
-					<form action="/INSERT_WHERE_ITS_SENT" method="post">
-						<div>
-							<label for="age">Age:</label>
-							<input type="text" id="age" />
-						</div>
-						<div>
-							<label for="gender">Gender:</label>
-							<input type="text" id="gender" />
-						</div>
-						<div>
-							<label for="exp">Experience (1 to 10):</label>
-							<textarea id="exp"></textarea>
-						</div>
-					
-					</form>
 					
                 </div>
 
@@ -140,7 +161,7 @@
 						
 						- Original code by Ignignokt
 						<br /> <br />
-                         <button id="btnShowHide" onclick="showHideMenuClick();">Show Cheat Sheet</button>
+                         <!--button id="btnShowHide" onclick="showHideMenuClick();">Show Cheat Sheet</button>
                          <div id="cheatsheet" style="display:none">
                             <ul style="list-style:none; padding:0;">
 								<li><b>Don't forget to use Eul's, invoke, and cast the spell</b></li>
@@ -157,7 +178,7 @@
                                 <li>Deafening Blast - Quas Wex Exort</li>
                                 
                             </ul>
-                        </div>
+                        </div-->
                 </div>
             </div>
         </div>
