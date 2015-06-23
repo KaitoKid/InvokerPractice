@@ -217,10 +217,10 @@ function execute(keyCode){
         if (targetQueue == currentQueue) {
             successState = 'matched';
 			flashStatus();
-			
             if (comboList.length > 0) {
                 comboNumber = comboList.shift();
                 console.log("Your next combo is");
+			    showNextComboImage();
                 console.log(combos[comboNumber].sequence);
 				indicateNextCombo(combos[comboNumber].sequence.toUpperCase());
             } else {
@@ -308,7 +308,7 @@ function indicateNextCombo(s){
 }
 
 function showNextComboImage(){
-	console.log(comboNumber);
-	$('#skillPic').css('background-image', 'comboList[comboNumber].image');	
+	console.log(combos[comboNumber].image);
+	$('#skillPic').css('background-image', combos[comboNumber].image);
 	$('#skillPic').css('display', 'block');
 }
