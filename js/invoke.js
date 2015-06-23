@@ -92,6 +92,7 @@ function initialize(mode, combosToDo) {
 	comboNumber = comboList.shift();
 	console.log("Your first combo is");
 	console.log(combos[comboNumber].sequence);
+	indicateNextCombo(combos[comboNumber].sequence.toUpperCase());
 	console.log("Game begun");
 }
 
@@ -209,6 +210,7 @@ function execute(keyCode){
                 comboNumber = comboList.shift();
                 console.log("Your next combo is");
                 console.log(combos[comboNumber].sequence);
+				indicateNextCombo(combos[comboNumber].sequence.toUpperCase());
             } else {
                 endGame(taskNum);
             }
@@ -280,4 +282,10 @@ function flashStatus(){
 function resetStatus(){
 	$("#status").css('color', '#FF0000')
 	$("#status").text("Status: Incorrect");
+}
+
+function indicateNextCombo(s){
+	var a = s.split('').join(' ');
+	$("#nextCombo").css('display', 'block');
+	$("#nextCombo").text(a);
 }
