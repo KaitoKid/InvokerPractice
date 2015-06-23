@@ -1,39 +1,56 @@
-var sections = ['practice', 'baseline', 'training', 'posttest'];
+var sectionIDs = ['practice', 'baseline', 'training', 'posttest', 'download'];
+var sections = [practice, baseline, training, posttest, downloadJson];
+var taskNum = 0;
+
+function submitForm() {
+    var email = $('#email').val();
+    var age = $('#age').val();
+    var gender = $('#gender').val();
+    var rank = $('#rank').val();
+    var exp = $('#exp').val();
+    data = {
+        'email': email,
+        'age': age,
+        'gender': gender,
+        'rank': rank,
+        'exp': exp,
+    }
+    addToResponseData((new Date()).getTime().toString(), 'bio', data);
+    $('#btnSubmit').css('display', 'none');
+    $('#bioForm').css('display', 'none');
+    $('#btnpractice').css('display', 'block');
+}
 
 function practice() {
     var combosToDo = ["1", "2"];
-    initialize('practice');
-    start(combosToDo);
-	$('#status').css('display', 'block');
+    $('#btnpractice').css('display', 'none');
+    initialize('practice', combosToDo);
+    taskNum++;
 }
 
 function baseline() {
     var combosToDo = ["3", "4"];
-    initialize('baseline');
-    start(combosToDo);
+    $('#btnbaseline').css('display', 'none');
+    initialize('baseline', combosToDo);
+    taskNum++;
 }
 
 function training() {
     var combosToDo = ["4", "5"];
-    initialize('training');
-    start(combosToDo);
+    $('#btntraining').css('display', 'none');
+    initialize('training', combosToDo);
+    taskNum++;
 }
 
 function posttest() {
     var combosToDo = ["5", "6"];
-    initialize('posttest');
-    start(combosToDo);
+    $('#btnposttest').css('display', 'none');
+    initialize('posttest', combosToDo);
+    taskNum++;
 }
 
-
-function start(combosToDo){
-    // let's be deterministic
-	// generateNewComboList();
-    comboList = combosToDo;
-	comboNumber = comboList.shift();
-	console.log("Your first combo is");
-	console.log(combos[comboNumber].sequence);
-	console.log("Game begun");
+function downloadJson() {
+    $('#doneInstructions').css('display', 'block');
 }
 
 function Circle(color, letter) {
@@ -51,10 +68,9 @@ function updateCircles() {
 var queueIds = ['circleOne', 'circleTwo', 'circleThree', 'circleFour', 'circleFive', 'circleSix'];
 var queueKeys = ['1', 'q', 'w', 'e', 'r', 'd'];
 
-function initialize(mode) {
+function initialize(mode, combosToDo) {
     queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
     updateCircles();
-	console.log(comboList);
     $(document).unbind('keydown')
     $(document).unbind('keyup')
     $(document).on('keydown', function(event){
@@ -71,8 +87,12 @@ function initialize(mode) {
         'invoker level': 0,
         'task mode': mode
     }
-    addToResponseData((new Date).getTime().toString(), 'initialize', data)
-	
+    addToResponseData((new Date).getTime().toString(), 'initialize', data);
+    comboList = combosToDo;
+	comboNumber = comboList.shift();
+	console.log("Your first combo is");
+	console.log(combos[comboNumber].sequence);
+	console.log("Game begun");
 }
 
 function configureFingers(name, key) {
@@ -190,7 +210,7 @@ function execute(keyCode){
                 console.log("Your next combo is");
                 console.log(combos[comboNumber].sequence);
             } else {
-                endGame();
+                endGame(taskNum);
             }
         }
 		else {
@@ -206,19 +226,15 @@ function execute(keyCode){
     addToResponseData(timestamp, 'key down', data);
 }
 
-
-$( "reset" ).click(function() {resetGame();});
-$( "start" ).click(function() {start();});
-$( "skip" ).click(function() {skip();});
-$( "endGame" ).click(function() {endGame();});
-
-function endGame(){
+function endGame(nextTask){
     $(document).unbind('keydown')
     $(document).unbind('keyup')
     queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
     updateCircles();
-	console.log("Game has been reset");
-    return;
+    $('#btn' + sectionIDs[taskNum]).css('display', 'block')
+    if (taskNum == sectionIDs.length - 1) {
+        $('#btndownload').html('<a href="data:' + encodeURI("text/json;charset=utf-8," + JSON.stringify(responseData)) + '" download="data.json">Download Json</a>');
+    }
 }
 
 function showHideMenuClick(){
@@ -232,38 +248,26 @@ function showHideMenuClick(){
     }
 }
 
-function showDownloadClick() {
-    $('#downloadJSON').css('display', 'block');
-}
-
-function showTestClick(section) {
-    $('#' + section).css('display', 'block');
-}
-
-function hideTestClick(section) {
-    $('#' + section).css('display', 'none');
-}
-
 function showHideMenuClick(){
 	if ($('#cheatsheet').css('display') == 'block') {
-                $('#cheatsheet').css('display', 'none');
-                $('#btnShowHide').text('Show Cheat Sheet');
-            }
-            else {
-                $('#cheatsheet').css('display', 'block');
-                $('#btnShowHide').text('Hide Cheat Sheet');
-            }
+        $('#cheatsheet').css('display', 'none');
+        $('#btnShowHide').text('Show Cheat Sheet');
+    }
+    else {
+        $('#cheatsheet').css('display', 'block');
+        $('#btnShowHide').text('Hide Cheat Sheet');
+    }
 }
 
 function showHideMenuClick1(){
 	if ($('#thisInfo').css('display') == 'block') {
-                $('#thisInfo').css('display', 'none');
-                $('#btnShowHide1').text('Show FAQ');
-            }
-            else {
-                $('#thisInfo').css('display', 'block');
-                $('#btnShowHide1').text('Hide FAQ');
-            }
+        $('#thisInfo').css('display', 'none');
+        $('#btnShowHide1').text('Show FAQ');
+    }
+    else {
+        $('#thisInfo').css('display', 'block');
+        $('#btnShowHide1').text('Hide FAQ');
+    }
 }
 
 function flashStatus(){
