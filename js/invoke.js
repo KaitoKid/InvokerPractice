@@ -69,6 +69,7 @@ function initialize(mode) {
         'task mode': mode
     }
     addToResponseData((new Date).getTime().toString(), 'initialize', data)
+	
 }
 
 function configureFingers(name, key) {
@@ -233,4 +234,26 @@ function showTestClick(section) {
 
 function hideTestClick(section) {
     $('#' + section).css('display', 'none');
+}
+
+function showHideMenuClick(){
+	if ($('#cheatsheet').css('display') == 'block') {
+                $('#cheatsheet').css('display', 'none');
+                $('#btnShowHide').text('Show Cheat Sheet');
+            }
+            else {
+                $('#cheatsheet').css('display', 'block');
+                $('#btnShowHide').text('Hide Cheat Sheet');
+            }
+}
+
+function showHideMenuClick1(){
+	if ($('#thisInfo').css('display') == 'block') {
+                $('#thisInfo').css('display', 'none');
+                $('#btnShowHide1').text('Show FAQ');
+            }
+            else {
+                $('#thisInfo').css('display', 'block');
+                $('#btnShowHide1').text('Hide FAQ');
+            }
 }
