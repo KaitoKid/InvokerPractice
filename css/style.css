@@ -57,8 +57,18 @@ body
     width: 50px;
     height: 50px;
     float: left;
-    border-radius: 100%;
+    border-radius: 50%;
     border: 1px solid #000000;
     background-color: #FFFFFF;
     color: #FFFFFF;
+}
+
+.circle-text {
+    color: #FFFFFF;
+    float: left;
+    line-height: 1;
+    margin-top: -0.5em;
+    padding-top: 50%;
+    text-align: center;
+    width: 100%;
 }
