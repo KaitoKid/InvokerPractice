@@ -60,7 +60,7 @@ function Circle(color, letter) {
 
 function updateCircles() {
     _.each(queue, function(circle, i) {
-        $('#' + queueIds[i]).css('background-color', circle.color);
+        $('#' + queueIds[i]).css('background-image', circle.color);
         $('#' + queueIds[i]).text(circle.letter);
     })
 }
@@ -93,6 +93,7 @@ function initialize(mode, combosToDo) {
 	console.log("Your first combo is");
 	console.log(combos[comboNumber].sequence);
 	indicateNextCombo(combos[comboNumber].sequence.toUpperCase());
+	showNextComboImage();
 	console.log("Game begun");
 }
 
@@ -105,7 +106,7 @@ function configureFingers(name, key) {
 
 //var defaultFingerMapping = {68: 5, 49: 9, 81: 1, 87: 2, 69: 3, 82: 4}
 var defaultFingerMapping = {68: 'd', 49: '1', 81: 'q', 87: 'w', 69: 'e', 82: 'r'}
-var colorMapping = {'d': '#6633FF', '1': '#FF33CC', 'q': '#33CCFF', 'w': '#FF3366', 'e': '#003DF5', 'r': '#CC2B14'}
+var colorMapping = {'d': 'url("http://hydra-media.cursecdn.com/dota2.gamepedia.com/3/39/Invoker.png?version=cc2a440da5178b1ebbf2778cba02b9b2")', '1': 'url("http://i.imgur.com/y7BAZmz.png")', 'q': 'url("http://i.imgur.com/4VlAp5E.png")', 'w': 'url("http://i.imgur.com/Y6Dvgnn.png")', 'e': 'url("http://i.imgur.com/volAeD9.png")', 'r': 'url("http://i.imgur.com/gJ4etuO.png")'}
 // Your color history
 var queue;
 // need function to assign new finger mappings
@@ -114,52 +115,62 @@ var combos = [
 	{
 	"name": "coldsnap",
 	"color": "#3366FF",
-    "sequence": "1qqqrd"
+    "sequence": "1qqqrd",
+	"image": 'url("http://i.imgur.com/JTlUPwY.png")',
 	},
 	{
 	"name": "ghostwalk",
 	"color": "#6633FF",
-    "sequence": "1qqwrd"
+    "sequence": "1qqwrd",
+	"image": 'url("http://i.imgur.com/oQS5lTU.png")',
 	},
 	{
 	"name": "icewall",
 	"color": "#FF33CC",
     "sequence": "1qqerd",
+	"image": 'url("http://i.imgur.com/e2L27wh.png")',
 	},
 	{
 	"name": "emp",
 	"color": "#33CCFF",
     "sequence": "1wwwrd",
+	"image": 'url("http://i.imgur.com/sHvsDqL.png")',
 	},
 	{
 	"name": "tornado",
 	"color": "#FF3366",
     "sequence": "1qwwrd",
+	"image": 'url("http://i.imgur.com/e0Yq9Hg.png")',
 	},
 	{
 	"name": "alacrity",
 	"color": "#003DF5",
     "sequence": "1wwerd",
+	"image": 'url("http://i.imgur.com/XgALJpp.png")',
 	},
 	{
 	"name": "sunstrike",
 	"color": "#CC2B14",
     "sequence": "1eeerd",
+	"image": 'url("http://i.imgur.com/ltGo5OL.png")',
 	},
 	{
 	"name": "forgespirit",
 	"color": "#CC33FF",
-    "sequence": "1qeerd"
+    "sequence": "1qeerd",
+	"image": 'url("http://i.imgur.com/JTlUPwY.png")',
 	},
 	{
 	"name": "chaosmeteor",
 	"color": "#FF668C",
     "sequence": "1weerd",
+	"image": 'url("http://i.imgur.com/sd52hs3.png")',
 	},
 	{
 	"name": "deafeningblast",
 	"color": "#D9FF66",
     "sequence": "1qwerd",
+	"image": 'url("http://i.imgur.com/IfcQLSF.png")',
 	},
 ];
 
@@ -206,6 +217,7 @@ function execute(keyCode){
         if (targetQueue == currentQueue) {
             successState = 'matched';
 			flashStatus();
+			
             if (comboList.length > 0) {
                 comboNumber = comboList.shift();
                 console.log("Your next combo is");
@@ -280,12 +292,23 @@ function flashStatus(){
 }
 
 function resetStatus(){
-	$("#status").css('color', '#FF0000')
+	$("#status").css('color', '#FF0000');
 	$("#status").text("Status: Incorrect");
 }
 
 function indicateNextCombo(s){
 	var a = s.split('').join(' ');
-	$("#nextCombo").css('display', 'block');
-	$("#nextCombo").text(a);
+	$("#nextCombo").fadeOut(100, function() {
+		$(this).text(a).fadeIn(100);
+	});
+	
+	$("#nextComboName").fadeOut(100, function() {
+		$(this).text(combos[comboNumber].name.toUpperCase()).fadeIn(100);
+	});	
+}
+
+function showNextComboImage(){
+	console.log(comboNumber);
+	$('#skillPic').css('background-image', 'comboList[comboNumber].image');	
+	$('#skillPic').css('display', 'block');
 }

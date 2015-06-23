@@ -59,7 +59,8 @@ body
     float: left;
     border-radius: 50%;
     border: 1px solid #000000;
-    background-color: #FFFFFF;
+    background-image: #FFFFFF;
+	background-size: 100% 100%;
     color: #FFFFFF;
 }
 
@@ -73,6 +74,16 @@ body
     width: 100%;
 }
 
+.square{
+    margin-left: auto;
+    margin-right: auto;
+    width: 96px;
+    height: 96px;
+    border: 1px solid #000000;
+    background-image: #FFFFFF;
+	background-size: 100% 100%;
+	background-image: url("https://www.google.com/images/srpr/logo11w.png");
+}
 #status{
 	color: #FF0000;
 }
