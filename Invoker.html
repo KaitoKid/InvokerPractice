@@ -16,7 +16,7 @@
             <div class="threecol-leftmask">
 
                 <div class="threecol-mid" style="text-align:center">
-                    <h1>Invoker Trainer by /-ATHF-\ Ignignokt</h1>
+                    <h1>Invoker Trainer Tracker</h1>
 
                     <div style="margin-top:30px"> 
                         <div style="width:400px; margin-left:auto; margin-right:auto; text-align:center;">
@@ -58,7 +58,6 @@
                 </div>
 
                 <div class="threecol-left" style="text-align:left;">
-                    <input type="checkbox" id="soundOnOff"/><label id='lblSoundOnOff'>Sound Off</label>
                      <h3 style ="margin-top:90px">Stats:</h3>
                      <div style="margin-top:5px; margin-left:auto; margin-right:auto;">
                         <label id="lblTimer" style="font-size:normal; font-weight:bold;">Time: -</label>
@@ -76,59 +75,76 @@
                         <label id="lblKeysPressed" style="font-size:normal; font-weight:bold;">Keys Pressed: -</label>
                     </div> 
 
-                    <div style="margin-top:225px; margin-left:auto; margin-right:auto;">
-                        <button id="btnAbout" onclick="showHideAboutClick();" style="margin-bottom:15px">About</button>
-                         <div id="aboutDiv" style="display:none">
-                            This app was created to help <br />
-                            DotA players new to Invoker <br />
-                            memorize his spell <br />
-                            combinations and make <br />
-                            learning Invoker <br />
-                            a little less daunting. <br /><br />
+					
+					<br /><br /><br />
+					<button id="btnShowHide1" onclick="showHideMenuClick1();">Hide FAQ</button>
+					<div id="thisInfo" style="display">
+						<ul style="list-style:none; padding:0;">
+							<li><b>What's this for?</b></li>
+							<br/>
+							<li>It's a small research project to track people's learning curve</li>
+							<br/>
+							<li><b>What are you tracking?</b></li>
+							<li>Just the keys that correspond to the item, spells, invoke, and cast. <a href="http://google.com">Here's our source code</a>.</li>
+							<br/><br/>
+							<li><b>Will you release the data?</b></li>
+							<li>Yes, one week after the research.</li>
+							<br/><br/>
+							<li><b>Are you tracking anything else?</b></li>
+							<li>No. We are tracking only those 5 keys on this page. You can see it all in our source.</li>
 
-                            My name is not Ignignokt, </br.>
-                            but I am a software consultant
-                            in the Chicago area specializing <br />
-                            in Web development, <br/>
-                            specifically Microsoft and .NET <br />
-                            technologies.<br /><br />
-
-                            Comments and suggestions can <br />
-                            be sent to: <a href="mailto:stsoftwaresolutions@gmail.com">stsoftwaresolutions@gmail.com</a><br />
-                            (It's just me, not a company)<br />
-                            
-                        </div>
-                    </div> 
+						</ul>
+					</div>
+					
+					<form action="/INSERT_WHERE_ITS_SENT" method="post">
+						<div>
+							<label for="age">Age:</label>
+							<input type="text" id="age" />
+						</div>
+						<div>
+							<label for="gender">Gender:</label>
+							<input type="text" id="gender" />
+						</div>
+						<div>
+							<label for="exp">Experience (1 to 10):</label>
+							<textarea id="exp"></textarea>
+						</div>
+					
+					</form>
+					
                 </div>
 
                 <div class="threecol-right">
                     <b>Instructions:</b>     <br/>                   
                         - Controls:  <br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblItemKey"></label> - Eul's  <br/>
                             &nbsp&nbsp&nbsp&nbsp <label id="lblQuasKey"></label> - Quas  <br/>
                             &nbsp&nbsp&nbsp&nbsp <label id="lblWexKey"></label> - Wex <br/> 
                             &nbsp&nbsp&nbsp&nbsp <label id="lblExortKey"></label> - Exort <br/>
-                            &nbsp&nbsp&nbsp&nbsp <label id="lblInvokeKey"></label> - Invoke Spell <br/>
-                            &nbsp&nbsp&nbsp&nbsp <label id="lblSpellOneKey"></label> - <label id="lblSpellOne">Spell One</label> <label id="lblSpellOneWarning" style="color:#FF0000">Already Invoked!</label><br/>
-                            &nbsp&nbsp&nbsp&nbsp <label id="lblSpellTwoKey"></label> - <label id="lblSpellTwo">Spell Two</label><br/><br />
-                            -Click Configure to customize controls <br />&nbsp&nbsp(cookies must be enabled)
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblInvokeKey"></label> - Invoke <br/>
+                            &nbsp&nbsp&nbsp&nbsp <label id="lblCastKey"></label> - <label id="lblCast">Cast</label><br/><br />
+                            - Click button name to reassign key
                              <br/> <br/>
                         - Choose A Mode and Click Start <br/>
-                            &nbsp&nbsp&nbsp&nbsp- Classic - Invoke 10 spells as fast as you can. <br/>
-                            &nbsp&nbsp&nbsp&nbsp- Time Trial - Invoke as many spells as possible in 30 <br />
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp seconds <br/>
-                            &nbsp&nbsp&nbsp&nbsp- Endless - No timer. Practice for as long as you want. <br />
-                            &nbsp&nbsp&nbsp&nbsp- Challenge - Invoke <u>and cast</u> as many combinations <br />
-                            &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp of spells in 30 seconds as you can.<br/> <br/>
-
+                            &nbsp&nbsp&nbsp&nbsp- Practice - Test if your keys are right. <br/>
+                            &nbsp&nbsp&nbsp&nbsp- Baseline - Once you're comfortable, set a baseline to compare your future scores to <br />
+                            &nbsp&nbsp&nbsp&nbsp- Training - Run through an entire set of Invoker combinations <br />
+                            &nbsp&nbsp&nbsp&nbsp- Post-Test - See how much you've improved compared to your baseline <br />
+							<br />
                         - For new Invokers <a href="http://www.dota2wiki.com/wiki/Invoker#Invoked_Skills">here</a> is a list of what the spells do.<br/><br />
                         - As well as <a href="http://www.dota2wiki.com/wiki/Invoker#Abilities">what</a> quas, wex and exort do when not <br/>
                         &nbsp invoked. <br/><br />
 
                         - Special thanks to <a href="http://www.reddit.com/r/DotA2">r/DotA2</a> for the suggestions!
                         <br /><br />
+						
+						- Original code by Ignignokt
+						<br /> <br />
                          <button id="btnShowHide" onclick="showHideMenuClick();">Show Cheat Sheet</button>
                          <div id="cheatsheet" style="display:none">
                             <ul style="list-style:none; padding:0;">
+								<li><b>Don't forget to use Eul's, invoke, and cast the spell</b></li>
+								<br/>
                                 <li>Cold Snap - Quas Quas Quas</li>
                                 <li>Ghost Walk - Quas Quas Wex</li>
                                 <li>Ice Wall - Quas Quas Exort</li>
