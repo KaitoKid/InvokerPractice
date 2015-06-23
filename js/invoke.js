@@ -1,3 +1,5 @@
+var sections = ['practice', 'baseline', 'training', 'posttest'];
+
 function practice() {
     var combosToDo = ["1", "2"];
     initialize('practice');
@@ -211,6 +213,7 @@ function endGame(){
     queue = _.map(queueKeys, function(key) {return new Circle('#FFFFFF', '')});
     updateCircles();
 	console.log("Game has been reset");
+    return;
 }
 
 function showHideMenuClick(){
