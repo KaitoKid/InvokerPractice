@@ -4,6 +4,7 @@ function practice() {
     var combosToDo = ["1", "2"];
     initialize('practice');
     start(combosToDo);
+	$('#status').css('display', 'block');
 }
 
 function baseline() {
@@ -183,6 +184,7 @@ function execute(keyCode){
         console.log(currentQueue);
         if (targetQueue == currentQueue) {
             successState = 'matched';
+			flashStatus();
             if (comboList.length > 0) {
                 comboNumber = comboList.shift();
                 console.log("Your next combo is");
@@ -191,6 +193,9 @@ function execute(keyCode){
                 endGame();
             }
         }
+		else {
+			resetStatus();
+		}
     }
     var data = {
         'key event': keyCode,
@@ -259,4 +264,16 @@ function showHideMenuClick1(){
                 $('#thisInfo').css('display', 'block');
                 $('#btnShowHide1').text('Hide FAQ');
             }
+}
+
+function flashStatus(){
+	$("#status").fadeOut(100, function() {
+		$(this).css('color', '#00CC66');
+		$(this).text("Status: Correct").fadeIn(100);
+	});
+}
+
+function resetStatus(){
+	$("#status").css('color', '#FF0000')
+	$("#status").text("Status: Incorrect");
 }
