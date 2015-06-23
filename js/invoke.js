@@ -248,6 +248,9 @@ function endGame(nextTask){
     $(document).unbind('keyup')
     queue = _.map(queueKeys, function(key) {return new Circle('', '')});
     updateCircles();
+    $('#nextComboName').text('');
+    $('#nextCombo').text('');
+    clearComboImage();
     $('#btn' + sectionIDs[taskNum]).css('display', 'block')
     if (taskNum == sectionIDs.length - 1) {
         $('#btndownload').html('<a href="data:' + encodeURI("text/json;charset=utf-8," + JSON.stringify(responseData)) + '" download="data.json">Download Json</a>');
@@ -290,12 +293,12 @@ function resetStatus(){
 
 function indicateNextCombo(s){
 	var a = s.split('').join(' ');
-	$("#nextCombo").fadeOut(100, function() {
-		$(this).text(a).fadeIn(100);
+	$("#nextCombo").fadeOut(0, function() {
+		$(this).text(a).fadeIn(0);
 	});
 	
-	$("#nextComboName").fadeOut(100, function() {
-		$(this).text(combos[comboNumber].name.toUpperCase()).fadeIn(100);
+	$("#nextComboName").fadeOut(0, function() {
+		$(this).text(combos[comboNumber].name.toUpperCase()).fadeIn(0);
 	});	
 }
 
@@ -303,4 +306,8 @@ function showNextComboImage(){
 	console.log(combos[comboNumber].image);
 	$('#skillPic').css('background-image', combos[comboNumber].image);
 	$('#skillPic').css('display', 'block');
+}
+
+function clearComboImage() {
+    $('#skillPic').css('background-image', '');
 }
