@@ -222,3 +222,15 @@ function showHideMenuClick(){
         $('#btnShowHide').text('Hide Cheat Sheet');
     }
 }
+
+function showDownloadClick() {
+    $('#downloadJSON').css('display', 'block');
+}
+
+function showTestClick(section) {
+    $('#' + section).css('display', 'block');
+}
+
+function hideTestClick(section) {
+    $('#' + section).css('display', 'none');
+}
