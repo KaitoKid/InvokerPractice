@@ -14,7 +14,7 @@
         <div class="threecol-midmask">
             <div class="threecol-leftmask">
 
-                <div class="threecol-mid" style="text-align:center">
+                <div class="threecol-mid" style="text-align:center"> 
                     <h1>Invoker Trainer Tracker</h1>
                     <div style="margin-top:30px"> 
 						<div style="width:400px; margin-left:auto; margin-right:auto; text-align:center;">
@@ -71,11 +71,8 @@
                                     </select>
                                 </div>
                                 <div>
-                                    <label>Rank in Dota2:</label>
-                                    <select id="rank">
-                                        <option value=""></option>
-                                        <option value="not ranked">Not ranked</option>
-                                    </select>
+                                    <label>MMR (0 if unranked):</label>
+                                    <input type="text" id="mmr" />
                                 </div>
                                 <div>
                                     <label>Experience with Invoker:</label>
@@ -101,8 +98,10 @@
 
                     </div>
                 </div>
-
+				
+				<!--
                 <div class="threecol-left" style="text-align:left;">
+				
                      <h3 style ="margin-top:90px">Stats:</h3>
                      <div style="margin-top:5px; margin-left:auto; margin-right:auto;">
                         <label id="lblTimer" style="font-size:normal; font-weight:bold;">Time: -</label>
@@ -122,6 +121,9 @@
 
 					
 					<br /><br /><br />
+					
+	
+					
 					<button id="btnShowHide1" onclick="showHideMenuClick1();">Hide FAQ</button>
 					<div id="thisInfo" style="display">
 						<ul style="list-style:none; padding:0;">
@@ -143,8 +145,11 @@
 					
 					
                 </div>
-
+				-->
+				
+				<!--
                 <div class="threecol-right">
+				
                     <b>Instructions:</b>     <br/>                   
                         - Controls:  <br/>
                             &nbsp&nbsp&nbsp&nbsp <label id="lblItemKey"></label> - Eul's  <br/>
@@ -187,8 +192,9 @@
                                 <li>Deafening Blast - Quas Wex Exort</li>
                                 
                             </ul>
-                        </div-->
+                        </div>
                 </div>
+				-->
             </div>
         </div>
         <audio id="soundHandle" style="display: none;"></audio>
