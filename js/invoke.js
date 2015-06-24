@@ -25,7 +25,6 @@ function submitForm() {
 
 function practice() {
     var combosToDo = ['3', '9', '8', '1'];
-    "1", "3", "8", "9"
     $('#btnpractice').css('display', 'none');
     initialize('practice', combosToDo);
     taskNum++;
@@ -86,14 +85,11 @@ function initialize(mode, combosToDo) {
         addToResponseData((new Date).getTime().toString(), 'key up', {})
     })
     var data = {
-        'finger mappings': defaultFingerMapping,
-        'dota2 level': 0,
-        'invoker level': 0,
         'task mode': mode,
         'combos': combosToDo,
     }
     addToResponseData((new Date).getTime().toString(), 'initialize', data);
-    comboList = combosToDo;
+    comboList = combosToDo.slice(0);
 	comboNumber = comboList.shift();
 	console.log("Your first combo is");
 	console.log(combos[comboNumber].sequence);
