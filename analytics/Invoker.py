@@ -6,4 +6,6 @@ import matplotlib.pyplot as plt
 class Invoker:
     def __init__(self, filename):
         od = collections.OrderedDict(sorted(json.load(open(filename)).items())
+        bio = od.items()[0][1]
+
 
