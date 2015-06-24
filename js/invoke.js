@@ -1,20 +1,22 @@
 var sectionIDs = ['practice', 'baseline', 'training', 'posttest', 'download'];
 var sections = [practice, baseline, training, posttest, downloadJson];
 var taskNum = 0;
+var bio;
 
 function submitForm() {
     var email = $('#email').val();
     var age = $('#age').val();
     var gender = $('#gender').val();
-    var rank = $('#rank').val();
+    var rank = $('#mmr').val();
     var exp = $('#exp').val();
-    data = {
+    var data = {
         'email': email,
         'age': age,
         'gender': gender,
         'rank': rank,
         'exp': exp,
     }
+    bio = data;
     addToResponseData((new Date()).getTime().toString(), 'bio', data);
     $('#btnSubmit').css('display', 'none');
     $('#bioForm').css('display', 'none');
@@ -255,7 +257,7 @@ function endGame(nextTask){
     clearComboImage();
     $('#btn' + sectionIDs[taskNum]).css('display', 'block')
     if (taskNum == sectionIDs.length - 1) {
-        $('#btndownload').html('<a href="data:' + encodeURI("text/json;charset=utf-8," + JSON.stringify(responseData)) + '" download="data.json">Download Json</a>');
+        $('#btndownload').html('<a href="data:' + encodeURI("text/json;charset=utf-8," + JSON.stringify(responseData)) + '" download="' + bio['email'].replace('@', '_').replace('.', '_') + '.json">Download Json</a>');
     }
 }
 
