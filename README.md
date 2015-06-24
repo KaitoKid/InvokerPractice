@@ -76,3 +76,35 @@ Spell generation
 Spell compare and reject
 
 Image elements
+
+---
+
+**JSON Format**
+
+	document.getElementById("download").innerHTML = '<a href="data:' + encodeURI("text/json;charset=utf-8," + JSON.stringify(responseData)) + '" download="data.json">download data</a>a>';
+
+
+	{
+	  #### Initial configuration and data
+	  'TIMESTAMP': {
+		'uuid': UUID,
+		'state': ,
+		'data': {
+		  'finger mappings': ,
+		  'player level': ,
+		  'task mode': ,
+		}
+	  },
+	  ##### On key press events
+	  'TIMESTAMP': {
+		'uuid': UUID,
+		'state': ,
+		'data': {
+		  'key event': ,
+		  'target queue': ,
+		  'current queue': ,
+		  'success state': ,
+		}
+	  },
+	  ...
+	}
