@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" >
 <head>
-    <title>Invoker Trainer Practice</title>
+    <title>Invoker Trainer by /-ATHF-\ Ignignokt</title>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="./js/jquery.js"></script>
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
@@ -72,20 +72,13 @@
                                 </div>
                                 <div>
                                     <label>Solo MMR:</label>
-                                    <select id="mmr">
-										<option value="unrankd">Unranked</option>
-                                        <option value="0-1000">0 - 1000</option>
-                                        <option value="1000-2000">1000 - 2000</option>
-                                        <option value="2000-3000">2000 - 3000</option>
-                                        <option value="3000-4000">3000 - 4000</option>
-                                        <option value="4000+">4000+</option>										</select>
+                                    <input type="text" id="mmr"/>
                                 </div>
                                 <div>
                                     <label>Experience with Invoker:</label>
                                     <select id="exp">
-                                        <option value="1">Main</option>
-                                        <option value="2">Occasionally play</option>
-                                        <option value="3">Never played</option>
+                                        <option value="1">Experienced</option>
+                                        <option value="2">Never played</option>
                                     </select>
                                 </div>
                             
@@ -96,7 +89,7 @@
                         <button id="btntraining" onclick="training();" style="display:none">Training</button>                 
                         <button id="btnposttest" onclick="posttest();"style="display:none">Posttest</button>
                         <button id="btndownload" onclick="downloadJson();" style="display:none">Download Json</button>
-                        <p id='doneInstructions' style="display:none">Finished with the task!  Download and email the .json file with your Steam ID URL to InvokerPracticeResearch@gmail.com to be entered into Steam raffle!</p>
+                        <p id='doneInstructions' style="display:none">Finished with the task!  Download and email the .json file to ___ to be entered into Steam raffle!</p>
                         <br /><br /><br /><br />
                         <!--button id="btnStart" style="display:none; width: 75px;" onclick="startGame();">Start</button>     
                         &nbsp&nbsp&nbsp&nbsp&nbsp &nbsp&nbsp&nbsp&nbsp&nbsp                 
