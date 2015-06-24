@@ -1,6 +1,9 @@
 # InvokerPractice
 Invoker skill practice script
 
+**V0.2**
+Changed pretty much everything
+
 **V0.1.1**
 
 Made it easier to test the game in console mode
